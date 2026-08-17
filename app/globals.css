@@ -1,13 +1,18 @@
 @import "tailwindcss";
 
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #929292;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-grisosh: #333333;
+  --color-grisosh-light: #3F3F3F;
+  --color-grisosh-text: #929292;
+  --color-grisosh-filter: #CCCCCC;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
