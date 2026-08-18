@@ -1,14 +1,35 @@
 "use client";
 
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import DonutsCharts from "@/components/charts/DonutsCharts";
 import TimesSummary from "@/components/charts/TimesSummary";
 import UseTimeEfficiencyChart from "@/components/charts/UseTimeEfficiencyChart";
 import StopsHistoryChart from "@/components/charts/StopsHistoryChart";
 import ProcessActiveStopsChart from "@/components/charts/ProcessActiveStopsChart";
+import PartsEfficiencyChart from "@/components/charts/PartsEfficiencyChart";
+import ErrorsQuantityChart from "@/components/charts/ErrorsQuantityChart";
+import AlertsModal, { AlertItem, } from "@/components/charts/AlertsModal";
+import { generateAlerts } from "@/lib/generateAlerts"
+import { useRouter } from "next/navigation";
 
 export default function BystronicContent() {
+    const [partsEfficiencyOpen, setPartsEfficiencyOpen] = useState(false);
+    const [errorsQuantityOpen, setErrorsQuantityOpen] = useState(false);
+    const [alertsOpen, setAlertsOpen] = useState(false);
+
+    const [alerts, setAlerts] = useState<AlertItem[]>([]);
     const searchParams = useSearchParams();
+    const router = useRouter();
+
+    function openAlerts() {
+        setAlerts(generateAlerts());
+        setAlertsOpen(true);
+    }
+
+    function closeAlerts() {
+        setAlertsOpen(false);
+    }
 
     const machine = searchParams.get("machine") ?? "Fibra 1";
 
@@ -17,11 +38,19 @@ export default function BystronicContent() {
             {/* Navbar */}
             <div className="w-full shadow-xl h-13 absolute top-0 bg-grisosh  flex flex-row justify-evenly items-center py-4">
                 <div className="flex flex-row gap-4 justify-center w-3/4">
-                    <button className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Home</button>
+                    <button
+                        onClick={() => router.push("/")}
+                        className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Home</button>
                     <button className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Export Excel</button>
-                    <button className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Alerts</button>
-                    <button className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Parts Efficiency</button>
-                    <button className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Errors Quantity</button>
+                    <button
+                        onClick={openAlerts}
+                        className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Alerts</button>
+                    <button
+                        onClick={() => setPartsEfficiencyOpen(true)}
+                        className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Parts Efficiency</button>
+                    <button
+                        onClick={() => setErrorsQuantityOpen(true)}
+                        className="bg-white cursor-pointer text-[12px] font-semibold rounded-lg text-grisosh-light p-1 w-30">Errors Quantity</button>
                 </div>
                 <span className="text-3xl italic text-white text-end mr-5 w-1/4">{machine}</span>
             </div>
@@ -66,7 +95,7 @@ export default function BystronicContent() {
                             </div>
                         </div>
                         <div className="h-1/2 w-full">
-                        <img src="/assets/images/machine.webp" alt="Logo" className="w-full h-full object-contain translate-y-10" />
+                            <img src="/assets/images/machine.webp" alt="Logo" className="w-full h-full object-contain translate-y-10" />
                         </div>
                     </div>
                 </div>
@@ -119,6 +148,148 @@ export default function BystronicContent() {
 
             </div>
 
+            {partsEfficiencyOpen && (
+                <div
+                    className="
+      fixed
+      inset-0
+      z-50
+      bg-black/40
+      flex
+      items-center
+      justify-center
+    "
+                    onClick={() => setPartsEfficiencyOpen(false)}
+                >
+                    <div
+                        className="
+        w-[90vw]
+        h-[75vh]
+        max-w-[1200px]
+        bg-white
+        shadow-2xl
+        border
+        border-gray-400
+        flex
+        flex-col
+      "
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Barra superior */}
+                        <div
+                            className="
+          h-10
+          bg-grisosh
+          text-white
+          flex
+          items-center
+          justify-center
+          relative
+          shrink-0
+        "
+                        >
+                            <p className="text-sm font-semibold">
+                                Parts Efficiency - {machine}
+                            </p>
+
+                            <button
+                                onClick={() => setPartsEfficiencyOpen(false)}
+                                className="
+            absolute
+            right-3
+            top-1/2
+            -translate-y-1/2
+            text-xl
+            cursor-pointer
+            hover:text-red-400
+          "
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        {/* Gráfica */}
+                        <div className="flex-1 min-h-0">
+                            <PartsEfficiencyChart />
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {errorsQuantityOpen && (
+                <div
+                    className="
+      fixed
+      inset-0
+      z-50
+      bg-black/40
+      flex
+      items-center
+      justify-center
+    "
+                    onClick={() => setErrorsQuantityOpen(false)}
+                >
+                    <div
+                        className="
+        w-[92vw]
+        h-[80vh]
+        max-w-[1400px]
+        bg-white
+        shadow-2xl
+        border
+        border-gray-400
+        flex
+        flex-col
+      "
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* Barra superior */}
+                        <div
+                            className="
+          h-10
+          bg-grisosh
+          text-white
+          flex
+          items-center
+          justify-center
+          relative
+          shrink-0
+        "
+                        >
+                            <p className="text-sm font-semibold">
+                                Errors Quantity - {machine}
+                            </p>
+
+                            <button
+                                onClick={() => setErrorsQuantityOpen(false)}
+                                className="
+            absolute
+            right-3
+            top-1/2
+            -translate-y-1/2
+            text-xl
+            cursor-pointer
+            hover:text-red-400
+          "
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        {/* Gráfica */}
+                        <div className="flex-1 min-h-0">
+                            <ErrorsQuantityChart />
+                        </div>
+                    </div>
+                </div>
+            )}
+            {alertsOpen && (
+                <AlertsModal
+                    title={machine}
+                    alerts={alerts}
+                    onClose={closeAlerts}
+                />
+            )}
         </main>
     );
 }
