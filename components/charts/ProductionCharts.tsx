@@ -311,9 +311,11 @@ function MachineModule({
         <DonutChart
           value={speedEfficiency}
           color={
-            speedEfficiency >= 80
+            speedEfficiency >= 90
               ? "#63d46f"
-              : "#ff6384"
+              : speedEfficiency >= 55 && speedEfficiency < 90
+              ? "#FFCC00"
+              : "#FF6384"
           }
           label="Speed efficiency"
         />

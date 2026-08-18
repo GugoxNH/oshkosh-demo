@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import ProductionCharts from "@/components/charts/ProductionCharts";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [symbolsOpen, setSymbolsOpen] = useState(true);
+  const router = useRouter();
+
   return (
     <main className="min-h-screen bg-[url('/assets/images/fondo.webp')] bg-size-[auto_650px] bg-center flex flex-col justify-center align-center items-center">
       {/* Navbar */}
@@ -19,22 +22,41 @@ export default function Home() {
 
       {/* Produccion */}
       <div className=" w-300 h-150 relative rounded dis bg-center bg-cover bg-[url('/assets/images/maquinas.webp')]">
-        <div className="absolute w-55 h-30 cursor-pointer bottom-15 left-145"></div>
-        <div className="w-15 h-23 cursor-pointer absolute bottom-50 left-160 bg-black rounded-lg flex flex-col">
+        <div
+          onClick={() =>
+            router.push("/bystronic?machine=" + encodeURIComponent("Fibra 1"))
+          }
+          className="absolute w-55 h-30 cursor-pointer bottom-15 left-145"></div>
+        <div onClick={() =>
+          router.push("/bystronic?machine=" + encodeURIComponent("Fibra 1"))
+        }
+          className="w-15 h-23 cursor-pointer absolute bottom-50 left-160 bg-black rounded-lg flex flex-col">
           <div className="h-1/4 w-full rounded-t-lg bg-grisosh-light text-white text-[10px] pt-1 pl-1">Fibra 1</div>
           <div className="h-1/4 w-full text-white text-[10px] pt-1 pl-1 flex flex-row justify-evenly items-center">
             <img className="animate-pulse" src="/assets/images/ok.webp" width="20px" /> Rv
           </div>
         </div>
-        <div className="absolute w-45 h-30 cursor-pointer bottom-43 left-202 rounded-4xl"></div>
-        <div className="w-15 h-23 absolute cursor-pointer bottom-78 left-210 bg-black rounded-lg flex flex-col">
+        <div onClick={() =>
+          router.push("/bystronic?machine=" + encodeURIComponent("Co 2"))
+        }
+          className="absolute w-45 h-30 cursor-pointer bottom-43 left-202 rounded-4xl"></div>
+        <div onClick={() =>
+          router.push("/bystronic?machine=" + encodeURIComponent("Co 2"))
+        }
+          className="w-15 h-23 absolute cursor-pointer bottom-78 left-210 bg-black rounded-lg flex flex-col">
           <div className="h-1/4 w-full rounded-t-lg bg-grisosh-light text-white text-[10px] pt-1 pl-1">Co 2</div>
           <div className="h-1/4 w-full text-white text-[10px] pt-1 pl-1 flex flex-row justify-evenly items-center">
             <img className="animate-pulse" src="/assets/images/ok.webp" width="20px" /> Rv
           </div>
         </div>
-        <div className="absolute w-45 h-20 cursor-pointer bottom-72 left-225 rounded-4xl"></div>
-        <div className="w-15 h-23 cursor-pointer absolute bottom-93 left-240 bg-black rounded-lg flex flex-col">
+        <div onClick={() =>
+          router.push("/bystronic?machine=" + encodeURIComponent("Fibra 2"))
+        }
+          className="absolute w-45 h-20 cursor-pointer bottom-72 left-225 rounded-4xl"></div>
+        <div onClick={() =>
+          router.push("/bystronic?machine=" + encodeURIComponent("Fibra 2"))
+        }
+          className="w-15 h-23 cursor-pointer absolute bottom-93 left-240 bg-black rounded-lg flex flex-col">
           <div className="h-1/4 w-full rounded-t-lg bg-grisosh-light text-white text-[10px] pt-1 pl-1">Fibra 2</div>
           <div className="h-1/4 w-full text-white text-[10px] pt-1 pl-1 flex flex-row justify-evenly items-center">
             <img className="animate-pulse" src="/assets/images/ok.webp" width="20px" /> Rv
