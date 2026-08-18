@@ -123,7 +123,7 @@ export default function TimesSummary({
     >
       <div
         className="
-          w-[240px]
+          w-60
           border
           border-black
           rounded-md
@@ -153,7 +153,7 @@ export default function TimesSummary({
           className="
             text-center
             text-[10px]
-            leading-[16px]
+            leading-4
             border-b
             border-gray-200
             pb-2
@@ -183,7 +183,7 @@ export default function TimesSummary({
         </div>
 
         {/* Tabla */}
-        <div className="text-[11px] leading-[15px]">
+        <div className="text-[11px] leading-3.75">
           {data.rows.map((row) => (
             <div
               key={row.label}

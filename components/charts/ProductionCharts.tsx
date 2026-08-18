@@ -399,9 +399,9 @@ function AlertsModal({
     >
       <div
         className="
-          w-[780px]
+          w-195
           max-w-[90vw]
-          h-[580px]
+          h-145
           max-h-[80vh]
           bg-white/95
           shadow-2xl
@@ -512,7 +512,7 @@ function DetailsModal({
     >
       <div
         className="
-          w-[280px]
+          w-70
           bg-white
           border
           border-gray-500
@@ -556,7 +556,7 @@ function DetailsModal({
           className="
             text-center
             text-[15px]
-            leading-[18px]
+            leading-4.5
             text-gray-600
             pb-3
             border-b
@@ -594,7 +594,7 @@ function DetailsModal({
                 grid
                 grid-cols-[1fr_85px]
                 gap-3
-                leading-[19px]
+                leading-4.75
               "
             >
               <span className="text-right">
